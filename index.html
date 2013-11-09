@@ -86,13 +86,13 @@ class: middle
 
 # How it works
 
- - Internally, broadcast by [ircd](https://wikitech.wikimedia.org/wiki/IRCD) on Wikimedia wikis
+ - Internally, uses on MediaWiki's `RecentChange::save()` hook, *see [RecentChanges.php](https://github.com/wikimedia/mediawiki-core/blob/0d1beb5d1316dd85c1125476fdf886fbd7c2ca0d/includes/changes/RecentChange.php#L231)*
 
- - Based on MediaWiki's `RecentChange::save()` hook
+ - Broadcast by [ircd](https://wikitech.wikimedia.org/wiki/IRCD) on Wikimedia wikis
 
  - Server is `irc.wikimedia.org`, channels are `#lang.project` (for 730+ wikis)
 
- - Format: `[page_title] [URL_of_the_revision] \* [user] \* [size_of_the_edit] [edit_summary]`
+ - Format: `[page_title] [flags] [URL_of_the_revision] \* [user] \* [size_of_edit] [edit_summary]`
 
 (or if you are fluent in regex)
 
@@ -108,7 +108,7 @@ r' ?(?P<summary>.+)?')
 
 class: middle, tools
 
-# Tools
+# Server
 
  - [github.com/hatnote/wikimon](https://github.com/hatnote/wikimon) (Python/Twisted)
 
@@ -118,7 +118,7 @@ class: middle, tools
 
 class: middle
 
-# Websockets
+# Client
 
 ```javascript
 var connection = new WebSocket('ws://wikimon.hatnote.com:9000');
@@ -147,15 +147,15 @@ class: middle
 
  - Learn more about the live data : http://meta.wikimedia.org/wiki/Research:Data#IRC_Feeds
 
- - How else could Wikimedia deliver live recent changes data? 
+ - How else could we deliver live recent changes data? 
 
-    - XMPP? http://www.mediawiki.org/wiki/Extension:XMLRC
     - Periodically polling the API (talk to [@mhashemi](https://twitter.com/mhashemi))
-
+    - XMPP? http://www.mediawiki.org/wiki/Extension:XMLRC
+    
  - Download this presentation : http://github.com/slaporte/rc-talk
 
     </textarea>
-    <script src="http://gnab.github.io/remark/downloads/remark-0.5.9.min.js" type="text/javascript">
+    <script src="js/remark.min.js" type="text/javascript">
     </script>
     <script type="text/javascript">
       var slideshow = remark.create();
